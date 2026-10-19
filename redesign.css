@@ -1,0 +1,575 @@
+/* =========================================================
+   GUATILA · EL TESORO VERDE — CAPA DE REDISEÑO
+   Paleta cálida y natural · composición editorial · modal
+   Este archivo se carga DESPUÉS de style.css y lo complementa
+   sin eliminar ninguna regla ni funcionalidad existente.
+========================================================= */
+
+
+/* =========================
+   1. PALETA — cálida, terrosa, menos "verde corporativo"
+========================= */
+
+:root {
+
+    /* Verdes se suavizan y pasan a ser acento, no protagonistas */
+    --verde-profundo: #3E4B36;
+    --verde-oscuro: #33301F;
+    --verde-natural: #6B7455;
+
+    /* Terracota — nuevo acento principal, cálido y territorial */
+    --terracota: #B0563A;
+    --terracota-suave: #E7C4AE;
+    --terracota-oscuro: #8C4029;
+
+    /* Marfil ligeramente más cálido */
+    --crema: #F5EFE2;
+    --crema-2: #EEE4D0;
+
+    /* Dorado se mantiene sutil, como brillo ocasional */
+    --dorado: #A6854C;
+
+    /* Radios y sombras más suaves y orgánicos */
+    --radio: 6px;
+    --sombra: 0 16px 40px rgba(60, 44, 30, 0.10);
+}
+
+
+/* =========================
+   2. TIPOGRAFÍA — Fraunces (display) + Inter (texto)
+========================= */
+
+body {
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+h1, h2, h3,
+.hero h1,
+.section-heading h2,
+.info-card h3,
+.food-content h3,
+.tamara-content h2,
+.contact-content h2,
+.contact-form-box h3,
+.logo strong,
+.card-number,
+.footer-brand {
+    font-family: "Fraunces", Georgia, serif !important;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+}
+
+.section-heading h2 em,
+.hero h1 span {
+    font-style: italic;
+    font-weight: 400;
+}
+
+
+/* =========================
+   3. LA PÁGINA RESPIRA — más espacio, menos "caja"
+========================= */
+
+.section {
+    padding: 150px 0;
+}
+
+@media (max-width: 900px) {
+    .section {
+        padding: 96px 0 !important;
+    }
+}
+
+.container {
+    width: min(1180px, calc(100% - 56px));
+}
+
+.section-heading {
+    max-width: 640px;
+}
+
+.section-heading p {
+    line-height: 1.75;
+}
+
+/* Los divisores curvos de sección se atenúan: menos "bloque" */
+.section-divider svg path {
+    opacity: 0.9;
+}
+
+
+/* =========================
+   4. TARJETAS -> COMPOSICIÓN EDITORIAL
+   Se elimina el look "tarjeta blanca con sombra" y se
+   sustituye por bloques con acento lateral y aire.
+========================= */
+
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border-top: 1px solid rgba(42, 38, 33, 0.12);
+}
+
+.info-card {
+    background: transparent;
+    border: none;
+    border-right: 1px solid rgba(42, 38, 33, 0.12);
+    border-radius: 0;
+    box-shadow: none;
+    padding: 44px 34px;
+    min-height: 0;
+}
+
+.info-card:last-child {
+    border-right: none;
+}
+
+.info-card:hover {
+    transform: none;
+    box-shadow: none;
+    background: rgba(176, 86, 58, 0.04);
+}
+
+.featured-card {
+    background: var(--verde-profundo);
+}
+
+.card-number {
+    color: var(--terracota);
+    font-size: 1.9rem;
+}
+
+.card-number::after {
+    background: var(--terracota);
+    opacity: 0.55;
+}
+
+.featured-card .card-number {
+    color: var(--terracota-suave);
+}
+
+@media (max-width: 900px) {
+    .project-grid {
+        grid-template-columns: 1fr !important;
+        border-top: none;
+    }
+    .info-card {
+        border-right: none !important;
+        border-bottom: 1px solid rgba(42, 38, 33, 0.12);
+    }
+}
+
+
+/* Sabores — mini tarjetas sin caja */
+.food-mini-card {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    border-top: 1px solid rgba(42, 38, 33, 0.12);
+    padding-top: 26px;
+}
+
+.food-mini-card:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+.food-mini-icon {
+    color: var(--terracota);
+}
+
+
+/* =========================
+   5. TÁMARA -> ACORDEÓN
+   Reduce el bloque de 5 tarjetas a una lista compacta
+   que se expande al hacer clic.
+========================= */
+
+.tamara-info-grid {
+    display: block;
+    background: transparent;
+    box-shadow: none;
+}
+
+.tamara-info-card {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(255, 253, 248, 0.16);
+    box-shadow: none;
+    padding: 0;
+    border-radius: 0;
+}
+
+.tamara-info-card:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+.tamara-info-toggle {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: none;
+    border: none;
+    padding: 22px 4px;
+    cursor: pointer;
+    text-align: left;
+    color: inherit;
+}
+
+.tamara-info-toggle .tamara-info-icon {
+    flex: 0 0 auto;
+    margin: 0;
+}
+
+.tamara-info-toggle h4 {
+    margin: 0;
+    flex: 1;
+    font-family: "Fraunces", Georgia, serif;
+    font-weight: 500;
+}
+
+.tamara-info-chevron {
+    flex: 0 0 auto;
+    width: 11px;
+    height: 11px;
+    border-right: 1.5px solid currentColor;
+    border-bottom: 1.5px solid currentColor;
+    transform: rotate(45deg);
+    opacity: 0.6;
+    transition: transform 0.35s var(--transicion);
+}
+
+.tamara-info-card.open .tamara-info-chevron {
+    transform: rotate(-135deg);
+}
+
+.tamara-info-body {
+    display: grid;
+    grid-template-rows: 0fr;
+    opacity: 0;
+    transition: grid-template-rows 0.4s var(--transicion), opacity 0.3s ease;
+}
+
+.tamara-info-body > p {
+    overflow: hidden;
+    margin: 0 0 22px 42px;
+    max-width: 46ch;
+    opacity: 0.85;
+}
+
+.tamara-info-card.open .tamara-info-body {
+    grid-template-rows: 1fr;
+    opacity: 1;
+}
+
+/* Fallback para navegadores sin soporte de grid-template-rows animable */
+.tamara-info-body {
+    overflow: hidden;
+}
+
+
+/* =========================
+   6. NAVBAR — más viva, glass elegante
+========================= */
+
+.navbar.scrolled {
+    background: rgba(245, 239, 226, 0.86);
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+    border-bottom: 1px solid rgba(42, 38, 33, 0.08);
+    box-shadow: 0 8px 30px rgba(60, 44, 30, 0.08);
+}
+
+.nav-menu > a:not(.nav-button) {
+    transition: color 0.25s ease, letter-spacing 0.25s ease;
+}
+
+.nav-menu > a:not(.nav-button):hover {
+    letter-spacing: 0.015em;
+}
+
+.navbar.scrolled .nav-menu a.active {
+    color: var(--terracota) !important;
+}
+
+.nav-menu > a:not(.nav-button)::after {
+    background: var(--terracota);
+    height: 1.5px;
+}
+
+.nav-button {
+    background: var(--terracota);
+    color: var(--crema) !important;
+    transition: background 0.3s ease, transform 0.3s var(--transicion);
+}
+
+.nav-button:hover {
+    background: var(--terracota-oscuro);
+    transform: translateY(-2px);
+}
+
+.navbar.scrolled .nav-button {
+    color: var(--crema) !important;
+}
+
+
+/* =========================
+   7. BOTONES — acento terracota
+========================= */
+
+.button-primary {
+    background: var(--terracota);
+}
+
+.button-primary:hover {
+    background: var(--terracota-oscuro);
+}
+
+.button-dark {
+    background: var(--verde-oscuro);
+}
+
+.button-dark:hover {
+    background: #211f14;
+}
+
+::selection {
+    background: var(--terracota-suave);
+    color: var(--texto);
+}
+
+
+/* =========================
+   8. MICROANIMACIONES REFINADAS
+========================= */
+
+.gallery-item,
+.info-card,
+.food-mini-card,
+.button {
+    transition:
+        transform 0.4s cubic-bezier(.22,1,.36,1),
+        background 0.3s ease,
+        box-shadow 0.4s cubic-bezier(.22,1,.36,1),
+        opacity 0.4s ease;
+}
+
+.leaf-accent {
+    opacity: 0.09;
+}
+
+/* Un par de hojas discretas adicionales, muy sutiles */
+.hero::after,
+.contact::before {
+    content: '';
+    position: absolute;
+    pointer-events: none;
+    width: 30px;
+    height: 30px;
+    opacity: 0.10;
+    background:
+        radial-gradient(circle at 30% 30%, transparent 60%, currentColor 61%) no-repeat;
+    color: var(--terracota-suave);
+    animation: driftLeaf 14s ease-in-out infinite;
+}
+
+.hero::after {
+    top: 22%;
+    right: 12%;
+}
+
+.contact::before {
+    bottom: 18%;
+    left: 8%;
+    animation-delay: -6s;
+}
+
+@keyframes driftLeaf {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    50% { transform: translate(-14px, 18px) rotate(18deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .leaf-accent,
+    .hero::after,
+    .contact::before,
+    .scroll-indicator {
+        animation: none !important;
+    }
+    * {
+        scroll-behavior: auto !important;
+    }
+}
+
+
+/* =========================
+   9. MASCOTA — zona reservada (inferior derecha)
+   Vacía por defecto; lista para recibir un GIF/personaje.
+   No debe tapar los botones de WhatsApp / volver arriba.
+========================= */
+
+.mascot-placeholder {
+    position: fixed;
+    right: 26px;
+    bottom: 168px;
+    width: 64px;
+    height: 64px;
+    z-index: 9997;
+    border-radius: 50%;
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(10px) scale(0.9);
+    transition: opacity 0.6s ease, transform 0.6s cubic-bezier(.22,1,.36,1);
+}
+
+/* Cuando se agregue contenido real (ej. clase "mascot-placeholder--visible"
+   junto con una imagen/gif de fondo), aparecerá con esta animación suave. */
+.mascot-placeholder--visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+}
+
+@media (max-width: 768px) {
+    .mascot-placeholder {
+        right: 14px;
+        bottom: 150px;
+        width: 52px;
+        height: 52px;
+    }
+}
+
+
+/* =========================
+   10. MODAL DE CONTACTO
+========================= */
+
+.contact-form-teaser {
+    text-align: left;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+}
+
+.contact-form-teaser .button {
+    margin-top: 8px;
+}
+
+/* Botón Contáctanos — limpio, elegante en PC y móvil */
+.contact-form-teaser {
+    text-align: center !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.contact-form-teaser .button,
+.contact-form-teaser .button-dark {
+    border: none !important;
+    outline: none;
+    background: var(--terracota, #B0563A) !important;
+    color: var(--crema, #F5EFE2) !important;
+    border-radius: 10px !important;
+    padding: 16px 36px !important;
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    box-shadow: 0 4px 20px rgba(176, 86, 58, 0.30);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    transition:
+        background 0.3s ease,
+        transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 0.3s ease;
+}
+
+.contact-form-teaser .button:hover,
+.contact-form-teaser .button-dark:hover {
+    background: var(--terracota-oscuro, #8C4029) !important;
+    box-shadow: 0 8px 30px rgba(176, 86, 58, 0.42);
+    transform: translateY(-3px);
+}
+
+.contact-modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: rgba(30, 26, 20, 0.55);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+
+.contact-modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.contact-modal {
+    position: relative;
+    width: min(480px, 100%);
+    max-height: 88vh;
+    overflow-y: auto;
+    background: var(--crema);
+    border-radius: 10px;
+    padding: 44px 38px;
+    box-shadow: 0 30px 80px rgba(30, 26, 20, 0.35);
+    transform: translateY(24px) scale(0.97);
+    opacity: 0;
+    transition: transform 0.4s cubic-bezier(.22,1,.36,1), opacity 0.35s ease;
+}
+
+.contact-modal-overlay.active .contact-modal {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+}
+
+.contact-modal-close {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(42, 38, 33, 0.06);
+    color: var(--texto);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.contact-modal-close:hover {
+    background: var(--terracota-suave);
+    transform: rotate(90deg);
+}
+
+.contact-modal h3 {
+    margin-top: 6px;
+}
+
+.contact-modal .contact-form {
+    margin-top: 24px;
+}
+
+@media (max-width: 560px) {
+    .contact-modal {
+        padding: 34px 22px;
+        border-radius: 8px;
+    }
+}

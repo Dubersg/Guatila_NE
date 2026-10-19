@@ -1,0 +1,633 @@
+/* =========================================================
+   GUATILA · EL TESORO VERDE — FASE 3 (MEJORAS)
+   Capa aditiva: cifras animadas, testimonios, FAQ, barra de
+   progreso, botón de reserva, compartir, spinner y confeti.
+   Se carga DESPUÉS de phase2.css y no elimina nada existente.
+========================================================= */
+
+
+/* =========================
+   1. BARRA DE PROGRESO DE SCROLL
+========================= */
+
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    width: 0%;
+    background: linear-gradient(90deg, var(--terracota, #B0563A), var(--dorado, #A6854C));
+    z-index: 10001;
+    transition: width 0.1s linear;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .scroll-progress { transition: none; }
+}
+
+
+/* =========================
+   2. CIFRAS DEL PROYECTO
+========================= */
+
+.impact {
+    padding: 70px 0 !important;
+    background: var(--crema-2, #EEE4D0);
+    border-top: 1px solid rgba(42, 38, 33, 0.10);
+    border-bottom: 1px solid rgba(42, 38, 33, 0.10);
+}
+
+.impact-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    text-align: center;
+}
+
+.impact-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.impact-number {
+    font-family: "Fraunces", Georgia, serif;
+    font-weight: 500;
+    font-size: clamp(2.2rem, 5vw, 3.2rem);
+    color: var(--terracota, #B0563A);
+    line-height: 1;
+}
+
+.impact-label {
+    font-size: 0.88rem;
+    letter-spacing: 0.02em;
+    opacity: 0.75;
+}
+
+@media (max-width: 760px) {
+    .impact-grid { grid-template-columns: repeat(2, 1fr); gap: 32px 20px; }
+}
+
+
+/* =========================
+   3. TESTIMONIOS — carrusel automático
+========================= */
+
+.testimonials-carousel {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 24px;
+}
+
+.testimonials-track {
+    position: relative;
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+}
+
+.testimonial-card {
+    display: none;
+    margin: 0;
+    padding: 32px 30px;
+    background: var(--crema, #F5EFE2);
+    border: 1px solid rgba(42, 38, 33, 0.10);
+    border-radius: var(--radio, 6px);
+    flex-direction: column;
+    gap: 14px;
+    opacity: 0;
+    transform: translateX(14px);
+    transition: opacity 0.45s ease, transform 0.45s cubic-bezier(.22,1,.36,1);
+}
+
+.testimonial-card.is-active {
+    display: flex;
+}
+
+.testimonial-card.is-visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+
+.testimonial-quote-icon {
+    font-family: Georgia, serif;
+    font-size: 2.6rem;
+    line-height: 1;
+    color: var(--terracota, #B0563A);
+    opacity: 0.55;
+}
+
+.testimonial-card blockquote {
+    margin: 0;
+    font-size: 0.98rem;
+    line-height: 1.7;
+    font-style: italic;
+    min-height: 3.4em;
+}
+
+.testimonial-card figcaption {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding-top: 6px;
+    border-top: 1px solid rgba(42, 38, 33, 0.10);
+}
+
+.testimonial-card figcaption strong {
+    font-size: 0.92rem;
+}
+
+.testimonial-card figcaption span {
+    font-size: 0.8rem;
+    opacity: 0.65;
+}
+
+.testimonial-arrow {
+    flex: 0 0 auto;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 1px solid rgba(42, 38, 33, 0.14);
+    background: var(--crema, #F5EFE2);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
+}
+
+.testimonial-arrow span {
+    width: 8px;
+    height: 8px;
+    border-right: 1.5px solid var(--texto, #2A2621);
+    border-bottom: 1.5px solid var(--texto, #2A2621);
+}
+
+.testimonial-arrow--prev span { transform: rotate(135deg); margin-left: 3px; }
+.testimonial-arrow--next span { transform: rotate(-45deg); margin-right: 3px; }
+
+.testimonial-arrow:hover {
+    background: var(--terracota, #B0563A);
+    border-color: var(--terracota, #B0563A);
+    transform: scale(1.06);
+}
+
+.testimonial-arrow:hover span {
+    border-color: #fff;
+}
+
+.testimonials-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 18px;
+}
+
+.testimonials-dot {
+    width: 8px;
+    height: 8px;
+    padding: 0;
+    border-radius: 50%;
+    border: none;
+    background: rgba(42, 38, 33, 0.2);
+    cursor: pointer;
+    transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.testimonials-dot.is-active {
+    background: var(--terracota, #B0563A);
+    transform: scale(1.3);
+}
+
+@media (max-width: 640px) {
+    .testimonial-arrow { display: none; }
+    .testimonial-card { padding: 26px 22px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .testimonial-card,
+    .testimonials-dot,
+    .testimonial-arrow { transition: none !important; }
+}
+
+
+/* =========================
+   4. FAQ (reutiliza el patrón acordeón de Támara)
+========================= */
+
+.faq-grid {
+    margin-top: 10px;
+    border-top: 1px solid rgba(42, 38, 33, 0.12);
+}
+
+.faq-card {
+    border-bottom: 1px solid rgba(42, 38, 33, 0.12);
+}
+
+.faq-toggle {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    background: none;
+    border: none;
+    padding: 22px 4px;
+    cursor: pointer;
+    text-align: left;
+    color: inherit;
+}
+
+.faq-toggle h4 {
+    margin: 0;
+    font-family: "Fraunces", Georgia, serif;
+    font-weight: 500;
+    font-size: 1.05rem;
+}
+
+.faq-chevron {
+    flex: 0 0 auto;
+    width: 11px;
+    height: 11px;
+    border-right: 1.5px solid currentColor;
+    border-bottom: 1.5px solid currentColor;
+    transform: rotate(45deg);
+    opacity: 0.6;
+    transition: transform 0.35s var(--transicion, ease);
+}
+
+.faq-card.open .faq-chevron {
+    transform: rotate(-135deg);
+}
+
+.faq-body {
+    display: grid;
+    grid-template-rows: 0fr;
+    opacity: 0;
+    overflow: hidden;
+    transition: grid-template-rows 0.4s var(--transicion, ease), opacity 0.3s ease;
+}
+
+.faq-body > p {
+    overflow: hidden;
+    margin: 0 0 22px 0;
+    max-width: 60ch;
+    opacity: 0.8;
+    line-height: 1.65;
+}
+
+.faq-card.open .faq-body {
+    grid-template-rows: 1fr;
+    opacity: 1;
+}
+
+
+/* =========================
+   5. BOTÓN "RESERVAR TU VISITA"
+========================= */
+
+.button-reserve {
+    background: #25D366;
+    color: #fff !important;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.button-reserve:hover {
+    background: #1ebd5a;
+}
+
+
+/* =========================
+   6. COMPARTIR EN EL FOOTER
+========================= */
+
+.footer-share {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 18px 0;
+}
+
+.footer-share-label {
+    font-size: 0.82rem;
+    opacity: 0.65;
+}
+
+.footer-share-btn {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(42, 38, 33, 0.07);
+    color: var(--texto, #2A2621);
+    transition: background 0.25s ease, transform 0.25s ease, color 0.25s ease;
+}
+
+.footer-share-btn:hover {
+    background: var(--terracota, #B0563A);
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+
+/* =========================
+   7. SPINNER EN EL BOTÓN DE ENVÍO
+========================= */
+
+#contactSubmitBtn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.btn-spinner {
+    display: none;
+    width: 15px;
+    height: 15px;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: btnSpin 0.7s linear infinite;
+}
+
+#contactSubmitBtn.is-loading {
+    opacity: 0.85;
+    cursor: wait;
+}
+
+#contactSubmitBtn.is-loading .btn-spinner { display: inline-block; }
+#contactSubmitBtn.is-loading .btn-label,
+#contactSubmitBtn.is-loading .btn-arrow { opacity: 0.6; }
+
+@keyframes btnSpin {
+    to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .btn-spinner { animation-duration: 1.4s; }
+}
+
+
+/* =========================
+   8. GALERÍA — cursor/insignia de zoom
+========================= */
+
+.gallery-item {
+    position: relative;
+}
+
+.gallery-item::after {
+    content: '';
+    position: absolute;
+    right: 14px;
+    bottom: 14px;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: rgba(20, 18, 14, 0.55) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cline x1='21' y1='21' x2='16.5' y2='16.5'/%3E%3Cpath d='M11 8v6M8 11h6'/%3E%3C/svg%3E") center/16px no-repeat;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
+}
+
+.gallery-item:hover::after,
+.gallery-item:focus-within::after {
+    opacity: 1;
+    transform: scale(1);
+}
+
+
+/* =========================
+   9. CONFETI (generado por JS al enviar el formulario)
+========================= */
+
+.confetti-piece {
+    position: fixed;
+    top: -10px;
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+    pointer-events: none;
+    z-index: 10002;
+    animation: confettiFall linear forwards;
+}
+
+@keyframes confettiFall {
+    to {
+        transform: translateY(105vh) rotate(var(--confetti-rot, 360deg));
+        opacity: 0.9;
+    }
+}
+
+
+/* =========================
+   10. HOJITA INTERACTIVA — "atrápala" en el hero
+   Detalle lúdico y con poquísimo texto: al tocar la hoja que
+   cruza el hero aparece un dato curioso breve y se esfuma.
+========================= */
+
+.leaf-particle {
+    pointer-events: auto;
+    cursor: pointer;
+}
+
+.leaf-particle--caught {
+    animation-play-state: paused;
+    filter: drop-shadow(0 2px 8px rgba(176, 86, 58, 0.45));
+}
+
+.leaf-fact-bubble {
+    position: fixed;
+    z-index: 10003;
+    transform: translate(-50%, 6px) scale(0.92);
+    background: var(--crema, #F5EFE2);
+    color: var(--texto, #2A2621);
+    border: 1px solid rgba(42, 38, 33, 0.12);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    white-space: nowrap;
+    box-shadow: 0 10px 28px rgba(60, 44, 30, 0.22);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.leaf-fact-bubble.visible {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1);
+}
+
+@media (max-width: 640px) {
+    .leaf-fact-bubble { font-size: 0.74rem; padding: 5px 12px; }
+}
+
+
+/* =========================
+   11. ROBOT QUE CAMINA — pegado abajo de la pantalla
+   Reemplaza la mascota fija anterior. Puro CSS (sin JS), va y
+   viene de lado a lado a lo largo del borde inferior. Decorativo:
+   pointer-events:none para nunca tapar clics de otros botones.
+========================= */
+
+.robot-walker {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 40px;
+    height: 46px;
+    z-index: 500;
+    pointer-events: none;
+    animation: robotWalkX 26s linear infinite;
+}
+
+@keyframes robotWalkX {
+    0%   { transform: translateX(0) scaleX(1); }
+    48%  { transform: translateX(calc(100vw - 40px)) scaleX(1); }
+    50%  { transform: translateX(calc(100vw - 40px)) scaleX(-1); }
+    98%  { transform: translateX(0) scaleX(-1); }
+    100% { transform: translateX(0) scaleX(1); }
+}
+
+.robot-walker-body {
+    display: block;
+    width: 100%;
+    height: 100%;
+    animation: robotBob 0.6s ease-in-out infinite;
+}
+
+@keyframes robotBob {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-3px); }
+}
+
+.robot-leg {
+    transform-box: fill-box;
+    transform-origin: 50% 0%;
+    animation: robotLegSwing 0.6s ease-in-out infinite;
+}
+
+.robot-leg--right {
+    animation-direction: reverse;
+}
+
+@keyframes robotLegSwing {
+    0%, 100% { transform: rotate(-16deg); }
+    50%      { transform: rotate(16deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .robot-walker,
+    .robot-walker-body,
+    .robot-leg {
+        animation: none !important;
+    }
+}
+
+@media (max-width: 640px) {
+    .robot-walker { width: 32px; height: 37px; }
+    @keyframes robotWalkX {
+        0%   { transform: translateX(0) scaleX(1); }
+        48%  { transform: translateX(calc(100vw - 32px)) scaleX(1); }
+        50%  { transform: translateX(calc(100vw - 32px)) scaleX(-1); }
+        98%  { transform: translateX(0) scaleX(-1); }
+        100% { transform: translateX(0) scaleX(1); }
+    }
+}
+
+
+/* =========================
+   12. TOGGLE DE IDIOMA (ES/EN)
+========================= */
+
+.lang-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    background: transparent;
+    border-radius: 999px;
+    padding: 6px 11px;
+    font-family: Inter, system-ui, sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    cursor: pointer;
+    color: white;
+    margin-right: 14px;
+    transition: border-color 0.25s ease, color 0.25s ease;
+}
+
+.navbar.scrolled .lang-toggle {
+    color: var(--verde-profundo, #1F3A2B);
+    border-color: rgba(42, 38, 33, 0.2);
+}
+
+.lang-toggle-es,
+.lang-toggle-en {
+    opacity: 0.55;
+    transition: opacity 0.2s ease, color 0.2s ease;
+}
+
+.lang-toggle-sep {
+    opacity: 0.4;
+    margin: 0 1px;
+}
+
+.lang-toggle[data-lang="es"] .lang-toggle-es,
+.lang-toggle[data-lang="en"] .lang-toggle-en {
+    opacity: 1;
+    color: var(--terracota-suave, #E7C4AE);
+}
+
+.navbar.scrolled .lang-toggle[data-lang="es"] .lang-toggle-es,
+.navbar.scrolled .lang-toggle[data-lang="en"] .lang-toggle-en {
+    color: var(--terracota, #B0563A);
+}
+
+@media (max-width: 480px) {
+    .lang-toggle { padding: 5px 9px; font-size: 0.68rem; margin-right: 8px; }
+}
+
+
+/* =========================
+   13. MODO LIGERO (gama baja / ahorro de datos / pestaña oculta)
+   La clase "perf-lite" la agrega el script en index.html cuando
+   detecta poca RAM/núcleos, "Ahorro de datos" o conexión 2G.
+   Sólo apaga adornos decorativos (no información real), y todo
+   vuelve a la normalidad si el dispositivo no calza ese perfil.
+========================= */
+
+/* El robot NUNCA se apaga por perf-lite: es pura animación de
+   transform (barata, acelerada por GPU) y es parte de la
+   personalidad del sitio. Sólo se apaga el marco LED, que es lo
+   único realmente costoso (box-shadow + filter animados sin parar
+   en TODA la pantalla). */
+html.perf-lite .led-frame {
+    animation: none !important;
+    opacity: 0.5;
+}
+
+html.perf-lite .hero-parallax-layer {
+    transform: none !important;
+}
+
+/* Pausa (no elimina) el marco LED y el robot mientras la pestaña
+   está en segundo plano: cero CPU/batería gastada en algo que
+   nadie está viendo. Al volver a la pestaña, siguen igual que antes. */
+html.tab-hidden .led-frame,
+html.tab-hidden .robot-walker-body,
+html.tab-hidden .robot-leg {
+    animation-play-state: paused !important;
+}
